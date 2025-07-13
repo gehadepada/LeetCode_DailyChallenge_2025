@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+#define endl "\n"
+#define ll long long
+#define unll unsigned long long
+#define pb push_back
+#define pp pop_back
+#define sz(s) s.size()
+#define yes cout << "YES\n"
+#define no cout << "NO\n"
+#define f first
+#define s second
+#define mod 1000000007
+
+using namespace std;
+class Solution {
+public:
+    int matchPlayersAndTrainers(vector<int>& players, vector<int>& trainers) {
+        // sort array to apply lower bound
+        sort(trainers.begin() ,trainers.end());
+        // i use multiset to automatic order elements
+        multiset<int>st ;
+       
+        for(int i =0 ; i <sz(trainers) ; i++)
+        {
+            st.insert(trainers[i]);
+        }
+        int res =  0; 
+        for(int i =0 ; i <sz(players) ; i++)
+        {
+            // use lower bound to find first element gretaer than or equal players[i]
+            auto index =st.lower_bound( players[i]);
+            if(index !=st.end())
+            {
+                res++;
+                st.erase(index); 
+
+            }
+        }
+        return res ;
+
+        
+    }
+};
