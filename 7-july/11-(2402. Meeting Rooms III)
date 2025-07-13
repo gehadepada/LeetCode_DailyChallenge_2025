@@ -17,7 +17,7 @@ class Solution {
 public:
     int mostBooked(int n, vector<vector<int>>& meetings) {
 
-        sort(meetings);
+        sort(meetings.begin() ,meetings.end());
         
         multiset<pair<ll, ll>> v;  // {end_time, room_id}
         map<ll, ll> m;             // room_id -> count
