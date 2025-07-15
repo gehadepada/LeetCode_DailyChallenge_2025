@@ -1,0 +1,30 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+#include<bits/stdc++.h>
+#define endl "\n"
+#define ll long long
+#define unll unsigned long long
+#define pb push_back
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode*current=head;
+        string st="";
+        while(current!=nullptr)
+        {
+           ((current->val))?st+=("1"):st+=("0");
+            current=current->next;
+        }
+        // built in function convert binary to decimal
+        return stoi(st, nullptr, 2);
+        
+    }
+};
