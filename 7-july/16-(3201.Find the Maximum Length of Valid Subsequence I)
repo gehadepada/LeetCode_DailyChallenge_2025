@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int maximumLength(vector<int>& nums) {
+        //cases:
+        //1-take all odds
+        //2-take all evens
+        //3-take even odd even odd even...
+        //4-take odd even odd even odd...
+        int e = 0 , o = 0 ;
+        vector<int>combine;
+        for(auto x  : nums)
+        {
+            ((x&1)) ? o++ : e++ ;
+            if(combine.empty())
+            {
+                combine.push_back(x);
+            }
+            else{
+                if((combine.back()&1) && (x%2==0))
+                {
+                     combine.push_back(x);
+                }
+                else if((combine.back()%2==0) && (x%2!=0))
+                {
+                     combine.push_back(x);
+                }
+
+            }
+
+        }
+        return max({e,o,(int)combine.size()});
+        
+    }
+};
