@@ -1,0 +1,30 @@
+class Solution {
+public:
+    string makeFancyString(string s) {
+        string res="";
+        map<char , int>m;
+        m[s[0]]++;
+        res.push_back(s[0]);
+       for(int i = 1; i < s.size() ; i++)
+       {
+         m[s[i]]++;
+         //if current character not equal the previouse the start count from beginning 
+        if(s[i]!=s[i-1])
+        {
+            m[s[i-1]]=0;
+           
+        }
+        //if frequancy >=3 then skip this character and don't store it 
+        if(m[s[i]]>=3)
+        {
+            m[s[i]]--;
+        }
+        else{
+            res.push_back(s[i]);
+        }
+       }
+
+        return res;
+        
+    }
+};
