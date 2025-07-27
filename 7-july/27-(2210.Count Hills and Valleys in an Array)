@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int countHillValley(vector<int>& nums) {
+        int result  = 0 ;
+        int left  = -1,right =-1 ;
+        vector<int>numss;
+        numss.push_back(nums[0]);
+        //sort unique numbers 
+        for(int i =1 ; i< nums.size() ;i++)
+        {
+            if(nums[i] != nums[i-1])
+            {
+                numss.push_back(nums[i]);
+            }
+        }
+        
+        nums=numss;
+        for(int i =1; i < nums.size()-1 ; i++)
+        {
+            left =nums[i-1];
+            right=nums[i+1];
+            if(((left > nums[i])&& (right > nums[i]) )|| ((left <nums[i]) && (right < nums[i])))
+            {
+               
+                result++;
+            }
+
+        }
+       return  result ;
+        
+    }
+};
