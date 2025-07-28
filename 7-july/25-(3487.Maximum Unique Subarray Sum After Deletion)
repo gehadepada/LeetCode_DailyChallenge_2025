@@ -1,1 +1,25 @@
 
+class Solution {
+public:
+    int maxSum(vector<int>& nums) {
+        sort(nums.rbegin() ,nums.rend());
+        set<int>st;
+       for(auto x: nums)
+       {
+         if(x>0)
+          {
+            st.insert(x);
+          }
+       }
+       int sum = 0; 
+       for(auto x : st)
+       {
+           sum+=x;
+       }
+        if(sum == 0)
+        {
+            sum+=nums[0];
+        }
+       return sum;
+    }
+};
