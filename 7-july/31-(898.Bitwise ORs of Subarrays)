@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int subarrayBitwiseORs(vector<int>& arr) {
+        //main idea 
+        //Every subarray ending at the current element can be either:
+        //.A new subarray that contains only the current element.
+        //.Or an extension of any subarray that ended at the previous element.
+        //.why second loob not get time limit ?->number of distinct elements of arry after or is limited
+        unordered_set<int>res,prev_result,new_prev_result;
+        for(auto num : arr)
+        {
+           new_prev_result.insert(num);
+           for(auto x : prev_result)
+           {
+              new_prev_result.insert(num | x);
+
+           }
+           prev_result=new_prev_result;
+           res.insert(prev_result.begin(),prev_result.end());
+           new_prev_result.clear();
+        }
+        return (int)res.size();
+        
+    }
+};
