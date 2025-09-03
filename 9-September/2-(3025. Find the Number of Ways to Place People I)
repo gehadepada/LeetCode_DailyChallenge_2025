@@ -1,0 +1,55 @@
+#define f first 
+#define s second 
+#define pp push_back
+
+class Solution {
+public:
+    int numberOfPairs(vector<vector<int>>& points) {
+        int n = points.size();
+        vector<pair<int,int>> v(n);
+        
+        // Convert to pairs
+        for(int i = 0; i < n; i++) {
+            v[i].f = points[i][0];
+            v[i].s = points[i][1];
+        }
+        
+        int res = 0;
+        
+        // Check all pairs (i,j) where i could be upper-left of j
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i == j) continue;
+                
+                int x1 = v[i].f, y1 = v[i].s;  // Point A
+                int x2 = v[j].f, y2 = v[j].s;  // Point B
+                
+                // Check if A is upper-left of B
+                // A.x <= B.x AND A.y >= B.y AND at least one strict inequality
+                if(x1 <= x2 && y1 >= y2 && (x1 < x2 || y1 > y2)) {
+                    
+                    // Check if rectangle/line is empty (no other points inside)
+                    bool isEmpty = true;
+                    
+                    for(int k = 0; k < n; k++) {
+                        if(k == i || k == j) continue;
+                        
+                        int px = v[k].f, py = v[k].s;
+                        
+                        // Check if point k is inside or on the rectangle boundary
+                        if(px >= x1 && px <= x2 && py <= y1 && py >= y2) {
+                            isEmpty = false;
+                            break;
+                        }
+                    }
+                    
+                    if(isEmpty) {
+                        res++;
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }
+};
